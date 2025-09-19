@@ -1,6 +1,6 @@
 // eslint-disable-next-line react-hooks/exhaustive-deps
 
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import "./calculator.css";
 
 type Row = {
@@ -56,10 +56,18 @@ const Calculator = () => {
 
     const valid = total && annualRatePct && months;
 
-    const {schedule, totalInterest, payoffMonth, remainingDebt} = useMemo(() => {
-        if (!valid) return {schedule: [], totalInterest: 0, payoffMonth: null, remainingDebt: 0};
-        return computeSchedule(Number(total), Number(annualRatePct) / 100, payments);
-    }, [total, annualRatePct, months, payments, valid]);
+    let schedule: Row[] = [];
+    let totalInterest = 0;
+    let payoffMonth: number | null = null;
+    let remainingDebt = 0;
+
+    if (valid) {
+        const result = computeSchedule(Number(total), Number(annualRatePct) / 100, payments);
+        schedule = result.schedule;
+        totalInterest = result.totalInterest;
+        payoffMonth = result.payoffMonth;
+        remainingDebt = result.remainingDebt;
+    }
 
     function setPaymentAt(index: number, value: number) {
         setPayments((prev) => {
