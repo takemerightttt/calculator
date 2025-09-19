@@ -1,3 +1,5 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
+
 import React, {useMemo, useState} from "react";
 import "./calculator.css";
 
