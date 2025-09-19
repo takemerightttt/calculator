@@ -139,6 +139,7 @@ const Calculator = () => {
                         type="number"
                         min={0.01}
                         step={0.01}
+                        inputMode="numeric"
                         value={annualRatePct}
                         onChange={(e) => setAnnualRatePct(e.target.value)}
                     />
@@ -149,6 +150,7 @@ const Calculator = () => {
                         type="number"
                         min={1}
                         step={1}
+                        inputMode="numeric"
                         value={months}
                         onChange={(e) => {
                             const val = e.target.value;
